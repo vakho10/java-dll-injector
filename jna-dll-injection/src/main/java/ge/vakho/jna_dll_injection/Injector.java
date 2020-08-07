@@ -6,6 +6,8 @@ import com.sun.jna.NativeLibrary;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.IntByReference;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
@@ -15,6 +17,8 @@ import static com.sun.jna.platform.win32.WinBase.WAIT_OBJECT_0;
 import static com.sun.jna.platform.win32.WinNT.*;
 
 public class Injector implements Runnable {
+
+    private static final Logger log = LogManager.getLogger();
 
     private int processId = -1;
     private Path processPath;
@@ -114,7 +118,7 @@ public class Injector implements Runnable {
             throw new RuntimeException("Something went wrong during waiting for execution of our loader thread to finish!");
         }
 
-        System.out.println("Dll path allocated at: " + pDllPath);
+        log.info("Dll path allocated at: {}", pDllPath);
 
         // (6) Free the memory allocated for our dll path
         // TODO should I delete this?
