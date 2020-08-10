@@ -113,7 +113,7 @@ public class Injector implements Runnable {
                 LoadLibraryAFunction, pDllPath, 0, threadId);
 
         // (5) Wait for the execution of our loader thread to finish
-        int waitResult = Kernel32.INSTANCE.WaitForSingleObject(hThread, 10 * 1000); // Wait 10 seconds (or INFINITE?)
+        int waitResult = Kernel32.INSTANCE.WaitForSingleObject(hThread, 20 * 1000); // Wait 20 seconds (or INFINITE?)
         if (WAIT_OBJECT_0 != waitResult) {
             throw new RuntimeException("Something went wrong during waiting for execution of our loader thread to finish!");
         }
